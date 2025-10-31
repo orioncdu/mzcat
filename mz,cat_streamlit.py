@@ -1,15 +1,15 @@
-import streamlit as st # FIX 1: Must be imported as 'st' to use st.text_input
+import streamlit as st
 import folium
 from folium.plugins import MeasureControl
 import math # Import math for trigonometry
-from streamlit_folium import st_folium # Needed to display the folium map in Streamlit
+from streamlit_folium import st_folium
 
 st.set_page_config(layout="wide", page_title="Wind Assessment Map")
 st.title("Wind Assessment Map Generator")
-st.markdown("Enter coordinates and roof height to generate the AS1170.2 influence zone.")
+st.markdown("Enter coordinates and average roof height of the structure to generate the Mz,cat influence zone (AS1170.2)")
 
 # Copy and paste the Latitude, and Longitude from Google Maps here
-CENTER_COORDS_str = st.text_input("Enter the center coordinates (Latitude,Longitude): ")
+CENTER_COORDS_str = st.text_input("Enter the center coordinates (Latitude, Longitude): ")
 
 # --- Configuration ---
 z_str = st.text_input("Enter the average roof height of the structure (m): ")
@@ -29,7 +29,7 @@ if CENTER_COORDS_str and z_str:
         RADIUS_METERS = LAG_DISTANCE_METERS + max(500, 40*z) # Fig. 4.1 AS1170.2
         st.success(f"Total Assessment Radius: {RADIUS_METERS:.1f}m")
 
-        OUTPUT_FILE = "radius_map.html"
+        # OUTPUT_FILE = "radius_map.html"
 
         # --- Helper Function for Radial Lines (Geodesic Math) ---
         # Calculates a point on the Earth's surface a certain distance and bearing from another point.
@@ -197,3 +197,5 @@ if CENTER_COORDS_str and z_str:
 
 else:
     st.warning("Please enter both coordinates and height to generate the map.")
+
+st.caption("Written by Anh Nguyen")
