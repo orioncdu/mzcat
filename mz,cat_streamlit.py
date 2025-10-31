@@ -199,10 +199,3 @@ else:
     st.warning("Please enter both coordinates and height to generate the map.")
 ```
 eof
-
-### To run this successfully, ensure your `requirements.txt` contains:
-
-```text
-streamlit
-folium
-streamlit-folium
