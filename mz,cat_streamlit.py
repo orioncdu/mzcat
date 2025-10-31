@@ -74,7 +74,7 @@ if CENTER_COORDS_str and z_str:
         # 2. Add the radius circle to the map (the large, partially transparent cyan area).
         folium.Circle(
             location=CENTER_COORDS,
-            radius=RADIUS_METERS,
+            radius=RADIUS_METERS,  # Folium interprets this value as meters
             color='red',
             fill=True,
             weight=2,
@@ -197,5 +197,3 @@ if CENTER_COORDS_str and z_str:
 
 else:
     st.warning("Please enter both coordinates and height to generate the map.")
-    
-eof
