@@ -12,7 +12,7 @@ st.markdown("Enter coordinates and average roof height of the structure to gener
 
 # 2. SHORTENED INPUT LABELS
 # Copy and paste the Latitude, and Longitude from Google Maps here
-CENTER_COORDS_str = st.text_input("Center Coordinates (Latitude, Longitude)): ")
+CENTER_COORDS_str = st.text_input("Center Coordinates (Latitude, Longitude): ")
 
 # --- Configuration ---
 z_str = st.text_input("Avg. Roof Height (m): ")
