@@ -74,7 +74,7 @@ if CENTER_COORDS_str and z_str:
         # 2. Add the radius circle to the map (the large, partially transparent cyan area).
         folium.Circle(
             location=CENTER_COORDS,
-            radius=RADIUS_METERS,  # Folium interprets this value as meters
+            radius=RADIUS_METERS,
             color='red',
             fill=True,
             weight=2,
