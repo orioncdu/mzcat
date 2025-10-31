@@ -197,5 +197,5 @@ if CENTER_COORDS_str and z_str:
 
 else:
     st.warning("Please enter both coordinates and height to generate the map.")
-```
+    
 eof
