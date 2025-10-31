@@ -8,11 +8,11 @@ st.set_page_config(layout="wide", page_title="Wind Assessment Map")
 
 # 1. SIMPLIFIED HEADER AND INTRO
 st.header("Mz,cat Influence Zone Assessment (AS1170.2)")
-st.markdown("Enter coordinates and average roof height below. The map will update automatically.")
+st.markdown("Enter coordinates and average roof height of the structure to generate the map.")
 
 # 2. SHORTENED INPUT LABELS
 # Copy and paste the Latitude, and Longitude from Google Maps here
-CENTER_COORDS_str = st.text_input("Center Coordinates (Lat,Lon): ")
+CENTER_COORDS_str = st.text_input("Center Coordinates (Latitude, Longitude)): ")
 
 # --- Configuration ---
 z_str = st.text_input("Avg. Roof Height (m): ")
@@ -31,8 +31,8 @@ if CENTER_COORDS_str and z_str:
         # 3. USE COLUMNS FOR COMPACT METRICS
         col1, col2, col3 = st.columns(3)
         
-        col1.info(f"Lag: {LAG_DISTANCE_METERS:.1f}m")
-        col2.info(f"Avg: {max(500, 40*z):.1f}m")
+        col1.info(f"Lag Distance: {LAG_DISTANCE_METERS:.1f}m")
+        col2.info(f"Averaging Distance: {max(500, 40*z):.1f}m")
         
         RADIUS_METERS = LAG_DISTANCE_METERS + max(500, 40*z) # Fig. 4.1 AS1170.2
         col3.success(f"Total Radius: {RADIUS_METERS:.1f}m")
