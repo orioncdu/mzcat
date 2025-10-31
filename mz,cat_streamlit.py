@@ -2,17 +2,20 @@ import streamlit as st
 import folium
 from folium.plugins import MeasureControl
 import math # Import math for trigonometry
-from streamlit_folium import st_folium
+from streamlit_folium import st_folium # Needed to display the folium map in Streamlit
 
 st.set_page_config(layout="wide", page_title="Wind Assessment Map")
-st.title("Wind Assessment Map Generator")
-st.markdown("Enter coordinates and average roof height of the structure to generate the Mz,cat influence zone (AS1170.2)")
 
+# 1. SIMPLIFIED HEADER AND INTRO
+st.header("Mz,cat Influence Zone Assessment (AS1170.2)")
+st.markdown("Enter coordinates and average roof height below. The map will update automatically.")
+
+# 2. SHORTENED INPUT LABELS
 # Copy and paste the Latitude, and Longitude from Google Maps here
-CENTER_COORDS_str = st.text_input("Enter the center coordinates (Latitude, Longitude): ")
+CENTER_COORDS_str = st.text_input("Center Coordinates (Lat,Lon): ")
 
 # --- Configuration ---
-z_str = st.text_input("Enter the average roof height of the structure (m): ")
+z_str = st.text_input("Avg. Roof Height (m): ")
 
 # --- Safety Guard to prevent crash on initial load (when inputs are empty) ---
 if CENTER_COORDS_str and z_str:
@@ -24,12 +27,15 @@ if CENTER_COORDS_str and z_str:
         z = float(z_str) 
         
         LAG_DISTANCE_METERS = 20*z # Fig. 4.1 AS1170.2
-        st.info(f"Lag Distance: {LAG_DISTANCE_METERS:.1f}m")
-        st.info(f"Averaging Distance: {max(500, 40*z):.1f}m")
+        
+        # 3. USE COLUMNS FOR COMPACT METRICS
+        col1, col2, col3 = st.columns(3)
+        
+        col1.info(f"Lag: {LAG_DISTANCE_METERS:.1f}m")
+        col2.info(f"Avg: {max(500, 40*z):.1f}m")
+        
         RADIUS_METERS = LAG_DISTANCE_METERS + max(500, 40*z) # Fig. 4.1 AS1170.2
-        st.success(f"Total Assessment Radius: {RADIUS_METERS:.1f}m")
-
-        # OUTPUT_FILE = "radius_map.html"
+        col3.success(f"Total Radius: {RADIUS_METERS:.1f}m")
 
         # --- Helper Function for Radial Lines (Geodesic Math) ---
         # Calculates a point on the Earth's surface a certain distance and bearing from another point.
@@ -198,4 +204,5 @@ if CENTER_COORDS_str and z_str:
 else:
     st.warning("Please enter both coordinates and height to generate the map.")
 
-st.caption("Written by Anh Nguyen")
+# Add the credit line at the very bottom
+st.caption("© 2025 Written by Anh Nguyen")
